@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:movie_app/src/movies/movie_cubit.dart';
-import 'package:movie_app/src/movies/movie_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/src/movies/presenter/logic/movie_cubit.dart';
+import 'package:movie_app/src/movies/presenter/logic/movie_state.dart';
 
 class MoviesPage extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _MoviesPageState extends State<MoviesPage> {
       appBar: AppBar(
         title: Text('Trending Movies'),
       ),
-      body: CubitBuilder<MoviesCubit, MoviesState>(
+      body: BlocBuilder<MoviesCubit, MoviesState>(
         builder: (context, state) {
           if (state is LoadingState) {
             return Center(

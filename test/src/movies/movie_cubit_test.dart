@@ -1,36 +1,33 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movie_app/src/movies/movie_cubit.dart';
-import 'package:movie_app/src/movies/movie_model.dart';
-import 'package:movie_app/src/movies/movie_repository.dart';
-import 'package:movie_app/src/movies/movie_state.dart';
+import 'package:movie_app/src/movies/domain/repositories/get_movies_repository.dart';
+import 'package:movie_app/src/movies/domain/usecases/get_movies.dart';
+import 'package:movie_app/src/movies/infra/models/movie_model.dart';
+import 'package:movie_app/src/movies/presenter/logic/movie_cubit.dart';
+import 'package:movie_app/src/movies/presenter/logic/movie_state.dart';
 
-class MockRepository extends Mock implements MovieRepository {}
+class MockGetMoviesRepository extends Mock implements GetMoviesRepository {}
 
 void main() {
-  MockRepository movieRepository;
-  MoviesCubit moviesCubit;
+  test('Emits movies when repository answer correctly', () async {
+    final mockGetMoviesRepository = MockGetMoviesRepository();
 
-  final movies = [
-    MovieModel(title: 'title 01', urlImage: 'url 01'),
-    MovieModel(title: 'title 02', urlImage: 'url 02'),
-  ];
+    final movies = [
+      MovieModel(title: 'title 01', urlImage: 'url 01'),
+      MovieModel(title: 'title 02', urlImage: 'url 02'),
+    ];
 
-  setUp(() {
-    movieRepository = MockRepository();
-    when(movieRepository.getMovies()).thenAnswer(
+    when(mockGetMoviesRepository.getMovies()).thenAnswer(
       (_) async => movies,
     );
 
-    moviesCubit = MoviesCubit(repository: movieRepository);
-  });
+    final moviesCubit = MoviesCubit(GetMoviesImpl(mockGetMoviesRepository));
 
-  test('Emits movies when repository answer correctly', () async {
     await expectLater(
       moviesCubit,
-      emits(
+      emitsInOrder([
         LoadedState(movies),
-      ),
+      ]),
     );
   });
 }

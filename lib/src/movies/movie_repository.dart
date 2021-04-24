@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_app/src/movies/movie_model.dart';
 
 class MovieRepository {
-  MovieRepository(this.client);
+  const MovieRepository(this.client);
 
   final Dio client;
 

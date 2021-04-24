@@ -8,8 +8,8 @@ import 'package:movie_app/src/movies/movie_state.dart';
 class MockRepository extends Mock implements MovieRepository {}
 
 void main() {
-  MockRepository? movieRepository;
-  MoviesCubit moviesCubit;
+  late MockRepository movieRepository;
+  late MoviesCubit moviesCubit;
 
   final movies = [
     MovieModel(title: 'title 01', urlImage: 'url 01'),
@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     movieRepository = MockRepository();
-    when(() => movieRepository!.getMovies()).thenAnswer(
+    when(() => movieRepository.getMovies()).thenAnswer(
       (_) async => movies,
     );
   });

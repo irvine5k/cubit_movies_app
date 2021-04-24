@@ -1,9 +1,9 @@
 class MovieModel {
-  MovieModel({
-    this.title,
-    this.urlImage,
+  const MovieModel({
+    required this.title,
+    required this.urlImage,
   });
 
-  final String? title;
-  final String? urlImage;
+  final String title;
+  final String urlImage;
 }

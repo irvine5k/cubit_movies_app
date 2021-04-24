@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/src/movies/movie_cubit.dart';
 import 'package:movie_app/src/movies/movie_page.dart';
 import 'package:movie_app/src/movies/movie_repository.dart';
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CubitProvider<MoviesCubit>(
+      home: BlocProvider<MoviesCubit>(
         create: (context) => MoviesCubit(
           repository: MovieRepository(
             Dio(),

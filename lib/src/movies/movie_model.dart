@@ -4,6 +4,6 @@ class MovieModel {
     this.urlImage,
   });
 
-  final String title;
-  final String urlImage;
+  final String? title;
+  final String? urlImage;
 }

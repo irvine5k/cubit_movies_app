@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/src/movies/movie_cubit.dart';
 import 'package:movie_app/src/movies/movie_state.dart';
 
@@ -15,7 +15,7 @@ class _MoviesPageState extends State<MoviesPage> {
       appBar: AppBar(
         title: Text('Trending Movies'),
       ),
-      body: CubitBuilder<MoviesCubit, MoviesState>(
+      body: BlocBuilder<MoviesCubit, MoviesState>(
         builder: (context, state) {
           if (state is LoadingState) {
             return Center(
@@ -32,9 +32,9 @@ class _MoviesPageState extends State<MoviesPage> {
               itemCount: movies.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
-                  title: Text(movies[index].title),
+                  title: Text(movies[index].title!),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(movies[index].urlImage),
+                    backgroundImage: NetworkImage(movies[index].urlImage!),
                   ),
                 ),
               ),

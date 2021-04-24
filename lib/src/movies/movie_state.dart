@@ -10,7 +10,6 @@ class InitialState extends MoviesState {
 
 class LoadingState extends MoviesState {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 

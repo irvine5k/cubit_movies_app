@@ -4,12 +4,12 @@ import 'package:movie_app/src/movies/movie_state.dart';
 
 class MoviesCubit extends Cubit<MoviesState> {
   MoviesCubit({required this.repository}) : super(InitialState()) {
-    _getTrendingMovies();
+    getTrendingMovies();
   }
 
   final MovieRepository repository;
 
-  void _getTrendingMovies() async {
+  void getTrendingMovies() async {
     try {
       emit(LoadingState());
       final movies = await repository.getMovies();
